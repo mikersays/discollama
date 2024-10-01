@@ -70,10 +70,8 @@ Follow the Ollama API documentation to run it on your local machine. Ensure it's
 Run the script using Python:
 
 ```bash
-python your_script_name.py
+python llamabot.py
 ```
-
-Replace `your_script_name.py` with the actual name of your script file.
 
 ### Interacting with the Bot
 
