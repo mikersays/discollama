@@ -48,7 +48,7 @@ async def on_message(message):
         conversation_history[channel_id].append(f"User: {user_input}")
 
         # Limit the conversation history to the last N exchanges to manage context length
-        MAX_HISTORY_LENGTH = 10  # Adjust this value as needed
+        MAX_HISTORY_LENGTH = 5  # Adjust this value as needed
         history = conversation_history[channel_id][-MAX_HISTORY_LENGTH:]
 
         # Construct the prompt by joining the conversation history
@@ -58,10 +58,10 @@ async def on_message(message):
         payload = {
             'model': MODEL_NAME,
             'prompt': prompt,
-            'max_tokens': 150,
+            'max_tokens': 500,  # Increased from 150 to allow longer responses
             'temperature': 0.7,
             'n': 1,
-            'stop': None
+            'stop': ["User:", "Assistant:"]  # Optional stop tokens
         }
 
         try:
@@ -77,8 +77,13 @@ async def on_message(message):
                 # Append the assistant's response to the conversation history
                 conversation_history[channel_id].append(f"Assistant: {generated_text}")
 
+                # Function to split the message into chunks of 2000 characters
+                def split_message(text, max_length=2000):
+                    return [text[i:i+max_length] for i in range(0, len(text), max_length)]
+
                 # Send the assistant's response back to the Discord channel
-                await message.channel.send(generated_text)
+                for chunk in split_message(generated_text):
+                    await message.channel.send(chunk)
             else:
                 error_message = response.text
                 await message.channel.send(f'Error from API: {error_message}')
