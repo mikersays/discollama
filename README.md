@@ -21,26 +21,44 @@ This is a Discord bot written in Python that integrates with the Ollama API to g
 
 ### 1. Clone the Repository or Download the Script
 
-Clone this repository or download the script to your local machine.
+Clone this repository or download the `llamabot.py` script to your local machine.
 
-### 2. Install Required Python Packages
+### 2. Create a Virtual Environment
 
-Install the necessary Python packages using `pip`:
+It's recommended to use a virtual environment to manage dependencies. Follow these steps to create and activate a virtual environment named `llamavenv`:
+
+**On Windows:**
+
+```bash
+python -m venv llamavenv
+llamavenv\Scripts\activate
+```
+
+**On macOS and Linux:**
+
+```bash
+python3 -m venv llamavenv
+source llamavenv/bin/activate
+```
+
+### 3. Install Required Python Packages
+
+With the virtual environment activated, install the necessary Python packages using `pip`:
 
 ```bash
 pip install discord.py requests
 ```
 
-### 3. Set Up the Discord Bot
+### 4. Set Up the Discord Bot
 
 - Go to the [Discord Developer Portal](https://discord.com/developers/applications).
 - Create a new application and add a bot to it.
 - Enable the **Message Content Intent** under the bot's settings.
 - Copy the bot's token.
 
-### 4. Configure the Script
+### 5. Configure the Script
 
-- Open the script in a text editor.
+- Open `llamabot.py` in a text editor.
 - Replace `'your_discord_bot_token'` with your actual Discord bot token:
 
   ```python
@@ -59,7 +77,7 @@ pip install discord.py requests
   MODEL_NAME = 'llama3.2'
   ```
 
-### 5. Run the Ollama API Locally
+### 6. Run the Ollama API Locally
 
 Follow the Ollama API documentation to run it on your local machine. Ensure it's accessible at the URL specified in `OLLAMA_API_URL`.
 
@@ -89,7 +107,7 @@ In any Discord channel where the bot has access:
 
 ### Changing the Command Trigger
 
-Modify the `COMMAND_TRIGGER` variable to change how you invoke the bot:
+Modify the `COMMAND_TRIGGER` variable in `llamabot.py` to change how you invoke the bot:
 
 ```python
 COMMAND_TRIGGER = '!l'
@@ -139,7 +157,7 @@ payload = {
 
 ### Python Exceptions
 
-- Make sure all required libraries are installed.
+- Make sure all required libraries are installed within the virtual environment.
 - Check the console for stack traces to identify issues.
 - Verify that you're using a compatible version of Python.
 
@@ -150,7 +168,3 @@ Contributions are welcome! Feel free to submit a pull request or open an issue f
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-Feel free to customize and expand upon this README to suit your project's needs.
